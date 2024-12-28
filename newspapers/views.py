@@ -6,7 +6,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from newspapers.forms import NewspaperTitleSearchForm, NewspaperForm
+from newspapers.forms import NewspaperTitleSearchForm, NewspaperForm, \
+    RedactorUsernameSearchForm, TopicNameSearchForm
 from newspapers.models import Newspaper, Redactor, Topic
 
 
@@ -33,11 +34,19 @@ class TopicListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
     def get_queryset(self) -> QuerySet:
-        Topic.objects.all()
-        pass
+        queryset = Topic.objects.all()
+        form = TopicNameSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
+        return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs) -> dict:
-        pass
+        context = super(TopicListView, self).get_context_data(**kwargs)
+        name = self.request.GET.get("name", "")
+        context["search_form"] = TopicNameSearchForm(
+            initial={"name": name}
+        )
+        return context
 
 
 class TopicCreateView(LoginRequiredMixin, generic.CreateView):
@@ -103,11 +112,21 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
     def get_queryset(self) -> QuerySet:
-        queryset = Newspaper.objects.prefetch_related("topic")
-        pass
+        queryset = Newspaper.objects.all()
+        form = RedactorUsernameSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(
+                username__icontains=form.cleaned_data["username"]
+            )
+        return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs) -> dict:
-        pass
+        context = super(RedactorListView, self).get_context_data(**kwargs)
+        username = self.request.GET.get("username", "")
+        context["search_form"] = RedactorUsernameSearchForm(
+            initial={"username": username}
+        )
+        return context
 
 
 class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
