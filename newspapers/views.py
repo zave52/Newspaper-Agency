@@ -68,6 +68,23 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
         pass
 
 
+class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Newspaper
+    fields = "__all__"
+    success_url = reverse_lazy("newspapers:newspaper-list")
+
+
+class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Newspaper
+    fields = "__all__"
+    success_url = reverse_lazy("newspapers:newspaper-list")
+
+
+class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Newspaper
+    success_url = reverse_lazy("newspapers:newspaper-list")
+
+
 class RedactorListView(LoginRequiredMixin, generic.ListView):
     model = Redactor
     paginate_by = 5
