@@ -24,3 +24,25 @@ class NewspaperTitleSearchForm(forms.ModelForm):
             attrs={"placeholder": "Search by title"}
         )
     )
+
+
+class TopicNameSearchForm(forms.ModelForm):
+    name = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={"placeholder": "Search by name"}
+        )
+    )
+
+
+class RedactorUsernameSearchForm(forms.ModelForm):
+    username = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={"placeholder": "Search by username"}
+        )
+    )
