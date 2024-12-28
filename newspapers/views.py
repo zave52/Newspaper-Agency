@@ -95,3 +95,21 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs) -> dict:
         pass
+
+
+class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Redactor
+    fields = "__all__"
+    success_url = reverse_lazy("newspapers:redactor-list")
+
+
+class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Redactor
+    fields = "__all__"
+    success_url = reverse_lazy("newspapers:redactor-list")
+
+
+class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Redactor
+    fields = "__all__"
+    success_url = reverse_lazy("newspapers:redactor-list")
