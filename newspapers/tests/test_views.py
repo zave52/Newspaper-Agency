@@ -70,6 +70,80 @@ class PublicTests(TestCase):
         self.assertNotEqual(response.status_code, 200)
 
 
+class PrivateTests(TestCase):
+    @classmethod
+    def setUpTestData(cls) -> None:
+        topic1 = Topic.objects.create(name="Crime")
+        topic2 = Topic.objects.create(name="Business")
+        Newspaper.objects.create(
+            title="Crime News",
+            content="Detailed report on recent crimes.",
+            published_date="2025-01-01",
+            topic=topic1
+        )
+        Newspaper.objects.create(
+            title="Business News",
+            content="Latest updates in the business world.",
+            published_date="2025-01-01",
+            topic=topic2
+        )
+        redactor1 = Redactor.objects.create(
+            username="jdoe",
+            first_name="John",
+            last_name="Doe",
+            years_of_experience=5
+        )
+        redactor2 = Redactor.objects.create(
+            username="asmith",
+            first_name="Alice",
+            last_name="Smith",
+            years_of_experience=7
+        )
+        redactor1.set_password("test12345")
+        redactor2.set_password("test12345")
+        redactor1.save()
+        redactor2.save()
+
+    def setUp(self) -> None:
+        user = Redactor.objects.create(
+            username="test",
+            years_of_experience=4
+        )
+        user.set_password("test12345")
+        user.save()
+        self.client.force_login(user)
+
+    def test_retrieve_topics(self) -> None:
+        response = self.client.get(reverse("newspapers:topic-list"))
+        self.assertEqual(response.status_code, 200)
+        topics = Topic.objects.all()
+        self.assertEqual(
+            list(response.context["topic_list"]),
+            list(topics)
+        )
+        self.assertTemplateUsed(response, "newspapers/topic_list.html")
+
+    def test_retrieve_newspapers(self) -> None:
+        response = self.client.get(reverse("newspapers:newspaper-list"))
+        self.assertEqual(response.status_code, 200)
+        newspapers = Newspaper.objects.all()
+        self.assertEqual(
+            list(response.context["newspaper_list"]),
+            list(newspapers)
+        )
+        self.assertTemplateUsed(response, "newspapers/newspaper_list.html")
+
+    def test_retrieve_redactors(self) -> None:
+        response = self.client.get(reverse("newspapers:redactor-list"))
+        self.assertEqual(response.status_code, 200)
+        redactors = Redactor.objects.all()
+        self.assertEqual(
+            list(response.context["redactor_list"]),
+            list(redactors)
+        )
+        self.assertTemplateUsed(response, "newspapers/redactor_list.html")
+
+
 class SearchTests(TestCase):
     @classmethod
     def setUpTestData(cls) -> None:
