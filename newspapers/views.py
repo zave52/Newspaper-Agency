@@ -7,7 +7,8 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from newspapers.forms import NewspaperTitleSearchForm, NewspaperForm, \
-    RedactorUsernameSearchForm, TopicNameSearchForm
+    RedactorUsernameSearchForm, TopicNameSearchForm, RedactorCreationForm, \
+    RedactorUpdateForm
 from newspapers.models import Newspaper, Redactor, Topic
 
 
@@ -131,19 +132,18 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
 
 class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
     model = Redactor
-    fields = "__all__"
+    form = RedactorCreationForm
     success_url = reverse_lazy("newspapers:redactor-list")
 
 
 class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Redactor
-    fields = "__all__"
+    form = RedactorUpdateForm
     success_url = reverse_lazy("newspapers:redactor-list")
 
 
 class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Redactor
-    fields = "__all__"
     success_url = reverse_lazy("newspapers:redactor-list")
 
 
