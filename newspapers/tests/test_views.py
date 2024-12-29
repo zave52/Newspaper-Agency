@@ -68,3 +68,71 @@ class PublicTests(TestCase):
             reverse("newspapers:redactor-detail", args=[1])
         )
         self.assertNotEqual(response.status_code, 200)
+
+
+class SearchTests(TestCase):
+    @classmethod
+    def setUpTestData(cls) -> None:
+        topic1 = Topic.objects.create(name="Crime")
+        topic2 = Topic.objects.create(name="Business")
+        Newspaper.objects.create(
+            title="Crime News",
+            content="Detailed report on recent crimes.",
+            published_date="2025-01-01",
+            topic=topic1
+        )
+        Newspaper.objects.create(
+            title="Business News",
+            content="Latest updates in the business world.",
+            published_date="2025-01-01",
+            topic=topic2
+        )
+        redactor1 = Redactor.objects.create(
+            username="jdoe",
+            first_name="John",
+            last_name="Doe",
+            years_of_experience=5
+        )
+        redactor2 = Redactor.objects.create(
+            username="asmith",
+            first_name="Alice",
+            last_name="Smith",
+            years_of_experience=7
+        )
+        redactor1.set_password("test12345")
+        redactor2.set_password("test12345")
+        redactor1.save()
+        redactor2.save()
+
+    def setUp(self) -> None:
+        user = Redactor.objects.create(
+            username="test",
+            years_of_experience=2
+        )
+        user.set_password("test1245")
+        user.save()
+        self.client.force_login(user)
+
+    def test_search_topic_by_name(self) -> None:
+        response = self.client.get(
+            reverse("newspapers:topic-list"), {"name": "Crime"}
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Crime")
+        self.assertNotContains(response, "Business")
+
+    def test_search_redactor_by_username(self) -> None:
+        response = self.client.get(
+            reverse("newspapers:redactor-list"), {"username": "asmith"}
+        )
+        self.assertEqual(response, 200)
+        self.assertContains(response, "asmith")
+        self.assertNotContains(response, "jdoe")
+
+    def test_search_newspaper_by_title(self) -> None:
+        response = self.client.get(
+            reverse("newspapers:newspaper-list"), {"title": "Business News"}
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Business News")
+        self.assertNotContains(response, "Crime News")
