@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
+from django.core.exceptions import ValidationError
 
-from newspapers.models import Newspaper
+from newspapers.models import Newspaper, Redactor
 
 
 class NewspaperForm(forms.ModelForm):
@@ -46,3 +48,45 @@ class RedactorUsernameSearchForm(forms.ModelForm):
             attrs={"placeholder": "Search by username"}
         )
     )
+
+
+class RedactorCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = Redactor
+        fields = UserCreationForm.Meta.fields + (
+            "years_of_experience",
+            "first_name",
+            "last_name"
+        )
+
+    def clean_years_of_experience(self) -> int:
+        return int(
+            validate_years_of_experience(
+                self.cleaned_data["years_of_experience"]
+            )
+        )
+
+
+class RedactorUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Redactor
+        fields = "__all__"
+
+    def clean_years_of_experience(self) -> int:
+        return int(
+            validate_years_of_experience(
+                self.cleaned_data["years_of_experience"]
+            )
+        )
+
+
+def validate_years_of_experience(
+    years_of_experience: int | float
+) -> int | float:
+    if not isinstance(years_of_experience, (int, float)):
+        raise ValidationError("Years of experience must be a number.")
+    if not (years_of_experience >= 0):
+        raise ValidationError(
+            "Years of experience must be a non-negative number."
+        )
+    return years_of_experience
