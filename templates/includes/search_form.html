@@ -1,0 +1,8 @@
+{% load custom_filters %}
+
+<form class="input-group input-group-dynamic mb-4" method="get" action="">
+  {% for field in search_form %}
+    {{ field|add_class:"form-control mb-4" }}
+  {% endfor %}
+  <input class="btn btn-secondary w-auto me-2 mb-4" type="submit" value="🔎">
+</form>
