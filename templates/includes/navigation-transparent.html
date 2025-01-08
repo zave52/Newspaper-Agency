@@ -1,0 +1,63 @@
+{% load static %}
+
+
+<nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3  navbar-transparent ">
+  <div class="container">
+    <a class="navbar-brand  text-white " href="{% url "newspapers:index" %}" rel="tooltip"
+       data-placement="bottom">
+      Newspaper Agency
+    </a>
+    <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation"
+            aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon mt-2">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </span>
+    </button>
+    <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
+      <ul class="navbar-nav navbar-nav-hover ms-auto">
+        <li class="nav-item mx-2">
+          <a href="{% url 'newspapers:newspaper-list' %}"
+             class="nav-link ps-2 d-flex cursor-pointer align-items-center font-weight-semibold">
+            Newspapers
+          </a>
+        </li>
+        <li class="nav-item mx-2">
+          <a href="{% url 'newspapers:redactor-list' %}"
+             class="nav-link ps-2 d-flex cursor-pointer align-items-center font-weight-semibold">
+            Redactors
+          </a>
+        </li>
+        <li class="nav-item mx-2">
+          <a href="{% url 'newspapers:topic-list' %}"
+             class="nav-link ps-2 d-flex cursor-pointer align-items-center font-weight-semibold">
+            Topics
+          </a>
+        </li>
+
+        {% if request.user.is_authenticated %}
+          <li class="nav-item ms-lg-auto">
+            <form id="logout-form" method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button type="submit" class="nav-link nav-link-icon me-2 d-inline text-sm z-index-1 font-weight-semibold"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="bottom">
+                <i class="fa fa-sign-out me-1"></i>
+                Logout
+              </button>
+            </form>
+          </li>
+        {% else %}
+          <li class="nav-item ms-lg-auto">
+            <a class="nav-link nav-link-icon me-2" href="{% url 'login' %}">
+              <i class="fa fa-sign-in me-1"></i>
+              <p class="d-inline text-sm z-index-1 font-weight-semibold" data-bs-toggle="tooltip"
+                 data-bs-placement="bottom" title="Sign in">Sign in</p>
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>

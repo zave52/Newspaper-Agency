@@ -1,0 +1,46 @@
+<footer class="footer pt-3 mt-3">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-4 col-6 mb-4 d-flex align-items-center">
+        <div>
+          <a href="{% url 'newspapers:index' %}">
+            <h6 class="font-weight-bolder mb-4">Newspaper Agency</h6>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-sm-4 col-6 mb-4">
+        <div>
+          <h6 class="text-sm">Sections</h6>
+          <ul class="flex-column ms-n3 nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'newspapers:newspaper-list' %}">
+                Newspapers
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'newspapers:redactor-list' %}">
+                Redactors
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'newspapers:topic-list' %}">
+                Topics
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="text-center">
+        <p class="text-dark my-4 text-sm font-weight-normal">
+          &copy; Created by <a href="https://github.com/zave52" class="font-weight-bold">zave</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
