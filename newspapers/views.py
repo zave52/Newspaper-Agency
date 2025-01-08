@@ -27,7 +27,7 @@ def index(request: HttpRequest) -> HttpResponse:
         "num_topics": num_topics,
         "num_visits": num_visits
     }
-    return render(request, "newspaper_agency/index.html", context=context)
+    return render(request, "newspapers/index.html", context=context)
 
 
 class TopicListView(LoginRequiredMixin, generic.ListView):
