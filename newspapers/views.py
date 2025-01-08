@@ -1,3 +1,4 @@
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import QuerySet
@@ -5,10 +6,11 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.generic import FormView
 
 from newspapers.forms import NewspaperTitleSearchForm, NewspaperForm, \
     RedactorUsernameSearchForm, TopicNameSearchForm, RedactorCreationForm, \
-    RedactorUpdateForm
+    RedactorUpdateForm, UserRegisterForm
 from newspapers.models import Newspaper, Redactor, Topic
 
 
@@ -149,3 +151,14 @@ class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Redactor
+
+
+class UserRegisterView(FormView):
+    template_name = 'registration/register.html'
+    form_class = UserRegisterForm
+    success_url = reverse_lazy("newspapers:index")
+
+    def form_valid(self, form) -> HttpResponse:
+        user = form.save()
+        login(self.request, user)
+        return super().form_valid(form)
