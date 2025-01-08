@@ -91,13 +91,13 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
 
 class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
     model = Newspaper
-    form = NewspaperForm
+    form_class = NewspaperForm
     success_url = reverse_lazy("newspapers:newspaper-list")
 
 
 class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Newspaper
-    form = NewspaperForm
+    form_class = NewspaperForm
     success_url = reverse_lazy("newspapers:newspaper-list")
 
 
@@ -134,13 +134,13 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
 
 class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
     model = Redactor
-    form = RedactorCreationForm
+    form_class = RedactorCreationForm
     success_url = reverse_lazy("newspapers:redactor-list")
 
 
 class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Redactor
-    form = RedactorUpdateForm
+    form_class = RedactorUpdateForm
     success_url = reverse_lazy("newspapers:redactor-list")
 
 
