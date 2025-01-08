@@ -67,6 +67,15 @@ class RedactorCreationForm(UserCreationForm):
         )
 
 
+class UserRegisterForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = Redactor
+        fields = UserCreationForm.Meta.fields + (
+            "first_name",
+            "last_name"
+        )
+
+
 class RedactorUpdateForm(forms.ModelForm):
     class Meta:
         model = Redactor
