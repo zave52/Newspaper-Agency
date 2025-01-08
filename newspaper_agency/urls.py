@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, include
 from django.conf.urls.static import static
 
@@ -24,7 +25,8 @@ from newspapers.views import UserRegisterView
 urlpatterns = [
   path("admin/", admin.site.urls),
   path("", include("newspapers.urls", namespace="newspapers")),
-  path("accounts/", include("django.contrib.auth.urls")),
-  path("accounts/register", UserRegisterView.as_view(), name='register'),
+  path("accounts/login/", LoginView.as_view(), name="login"),
+  path("accounts/logout/", LogoutView.as_view(next_page='login'), name='logout'),
+  path("accounts/register/", UserRegisterView.as_view(), name='register'),
   path("__debug__/", include("debug_toolbar.urls")),
 ] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
