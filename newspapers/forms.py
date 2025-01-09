@@ -56,7 +56,8 @@ class RedactorCreationForm(UserCreationForm):
         fields = UserCreationForm.Meta.fields + (
             "years_of_experience",
             "first_name",
-            "last_name"
+            "last_name",
+            "email"
         )
 
     def clean_years_of_experience(self) -> int:
@@ -79,7 +80,7 @@ class UserRegisterForm(UserCreationForm):
 class RedactorUpdateForm(forms.ModelForm):
     class Meta:
         model = Redactor
-        fields = "__all__"
+        fields = ("username", "first_name", "last_name", "years_of_experience", "email",)
 
     def clean_years_of_experience(self) -> int:
         return int(
