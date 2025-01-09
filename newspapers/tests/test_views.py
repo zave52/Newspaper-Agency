@@ -8,12 +8,13 @@ class PublicTests(TestCase):
     @classmethod
     def setUpTestData(cls) -> None:
         topic = Topic.objects.create(name="test")
-        Newspaper.objects.create(
+        newspaper = Newspaper.objects.create(
             title="test",
             content="test content",
             published_date="2025-01-01",
-            topic=topic
         )
+        newspaper.topics.set([topic])
+        newspaper.save()
         redactor = Redactor.objects.create(
             username="test",
             first_name="first_name",
@@ -75,18 +76,20 @@ class PrivateTests(TestCase):
     def setUpTestData(cls) -> None:
         topic1 = Topic.objects.create(name="Crime")
         topic2 = Topic.objects.create(name="Business")
-        Newspaper.objects.create(
+        newspaper1 = Newspaper.objects.create(
             title="Crime News",
             content="Detailed report on recent crimes.",
             published_date="2025-01-01",
-            topic=topic1
         )
-        Newspaper.objects.create(
+        newspaper2 = Newspaper.objects.create(
             title="Business News",
             content="Latest updates in the business world.",
             published_date="2025-01-01",
-            topic=topic2
         )
+        newspaper1.topics.set([topic1])
+        newspaper2.topics.set([topic2])
+        newspaper1.save()
+        newspaper2.save()
         redactor1 = Redactor.objects.create(
             username="jdoe",
             first_name="John",
@@ -149,18 +152,21 @@ class SearchTests(TestCase):
     def setUpTestData(cls) -> None:
         topic1 = Topic.objects.create(name="Crime")
         topic2 = Topic.objects.create(name="Business")
-        Newspaper.objects.create(
+        newspaper1 = Newspaper.objects.create(
             title="Crime News",
             content="Detailed report on recent crimes.",
             published_date="2025-01-01",
-            topic=topic1
         )
-        Newspaper.objects.create(
+        newspaper2 = Newspaper.objects.create(
             title="Business News",
             content="Latest updates in the business world.",
             published_date="2025-01-01",
-            topic=topic2
         )
+        newspaper1.topics.set([topic1])
+        newspaper2.topics.set([topic2])
+        newspaper1.save()
+        newspaper2.save()
+
         redactor1 = Redactor.objects.create(
             username="jdoe",
             first_name="John",

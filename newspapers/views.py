@@ -74,7 +74,7 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
     def get_queryset(self) -> QuerySet:
-        queryset = Newspaper.objects.select_related("topic")
+        queryset = Newspaper.objects.all()
         form = NewspaperTitleSearchForm(self.request.GET)
         if form.is_valid():
             return queryset.filter(title__icontains=form.cleaned_data["title"])

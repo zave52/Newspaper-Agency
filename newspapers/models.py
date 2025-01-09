@@ -27,7 +27,7 @@ class Newspaper(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     published_date = models.DateField(auto_now_add=True)
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    topics = models.ManyToManyField(Topic, related_name="newspapers")
     publishers = models.ManyToManyField(
         get_user_model(), related_name="newspapers"
     )
@@ -36,4 +36,4 @@ class Newspaper(models.Model):
         ordering = ("title",)
 
     def __str__(self) -> str:
-        return f"{self.title} ({self.topic.name})"
+        return f"{self.title} ({', '.join([str(topic) for topic in self.topics.all()])})"
