@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}index-page bg-gray-200{% endblock body %}
+
+{% block content %}
+  <header class="header-2">
+    <div class="page-header min-vh-50 relative"
+         style="background-image: url('{% static "assets/img/bg-landing.jpg" %}')">
+      <span class="mask bg-gradient-dark opacity-4"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center mx-auto">
+            <h1 class="text-white font-weight-black pt-3 mt-n5">Newspapers</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
+    <h1 class="p-2">
+      {{ newspaper.title }}
+      <a href="{% url 'newspapers:newspaper-update' pk=newspaper.id %}" class="btn btn-primary link-to-page">
+        Update
+      </a>
+      <a href="{% url 'newspapers:newspaper-delete' pk=newspaper.id %}" class="btn btn-danger link-to-page">
+        Delete
+      </a>
+    </h1>
+    <p>{{ newspaper.content }}</p>
+    <p class="author-decor">
+      Authors:
+      {% for author in newspaper.publishers.all %}
+        <a href="{% url 'newspapers:redactor-detail' pk=author.id %}">{{ author.first_name }} {{ author.last_name }}</a>
+        ,
+      {% endfor %}
+    </p>
+    <p class="date">
+      Published date: {{ newspaper.published_date }}
+    </p>
+  </div>
+{% endblock %}
