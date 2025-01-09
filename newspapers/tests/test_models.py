@@ -43,15 +43,17 @@ class NewspaperModelTests(TestCase):
     @classmethod
     def setUpTestData(cls) -> None:
         topic = Topic.objects.create(name="test")
-        Newspaper.objects.create(
+        newspaper = Newspaper.objects.create(
             title="test",
             content="test content",
             published_date="2025-01-01",
-            topic=topic
         )
+        newspaper.topics.set([topic])
+        newspaper.save()
 
     def test_get_str(self) -> None:
         newspaper = Newspaper.objects.get(id=1)
         self.assertEqual(
-            str(newspaper),f"{newspaper.title} ({newspaper.topic.name})"
+            str(newspaper),
+            f"{newspaper.title} ({', '.join([str(topic) for topic in newspaper.topics.all()])})"
         )
