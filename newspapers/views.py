@@ -112,7 +112,7 @@ class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
 
 class RedactorListView(LoginRequiredMixin, generic.ListView):
     model = Redactor
-    paginate_by = 5
+    paginate_by = 10
 
     def get_queryset(self) -> QuerySet:
         queryset = Redactor.objects.all()
