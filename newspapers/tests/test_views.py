@@ -199,7 +199,7 @@ class SearchTests(TestCase):
         response = self.client.get(
             reverse("newspapers:redactor-list"), {"username": "asmith"}
         )
-        self.assertEqual(response, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertContains(response, "asmith")
         self.assertNotContains(response, "jdoe")
 
