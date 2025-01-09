@@ -74,7 +74,7 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
     def get_queryset(self) -> QuerySet:
-        queryset = Newspaper.objects.all()
+        queryset = Newspaper.objects.prefetch_related('topics', 'publishers')
         form = NewspaperTitleSearchForm(self.request.GET)
         if form.is_valid():
             return queryset.filter(title__icontains=form.cleaned_data["title"])
@@ -151,6 +151,10 @@ class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Redactor
+
+    def get_queryset(self) -> QuerySet:
+        queryset = Redactor.objects.filter(id=self.kwargs["pk"]).prefetch_related("newspapers")
+        return queryset
 
 
 class UserRegisterView(FormView):
