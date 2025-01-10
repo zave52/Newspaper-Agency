@@ -8,10 +8,17 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import FormView
 
-from newspapers.forms import NewspaperTitleSearchForm, NewspaperForm, \
-    RedactorUsernameSearchForm, TopicNameSearchForm, RedactorCreationForm, \
-    RedactorUpdateForm, UserRegisterForm
 from newspapers.models import Newspaper, Redactor, Topic
+
+from newspapers.forms import (
+    NewspaperTitleSearchForm,
+    NewspaperForm,
+    RedactorUsernameSearchForm,
+    TopicNameSearchForm,
+    RedactorCreationForm,
+    RedactorUpdateForm,
+    UserRegisterForm
+)
 
 
 @login_required
@@ -153,7 +160,9 @@ class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Redactor
 
     def get_queryset(self) -> QuerySet:
-        queryset = Redactor.objects.filter(id=self.kwargs["pk"]).prefetch_related("newspapers")
+        queryset = Redactor.objects.filter(
+            id=self.kwargs["pk"]
+        ).prefetch_related("newspapers")
         return queryset
 
 
