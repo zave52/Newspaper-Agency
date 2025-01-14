@@ -61,6 +61,11 @@
 
 The Newspaper Agency application is now live and can be accessed at the following link: [Newspaper Agency](https://newspaper-agency-y8oq.onrender.com/).
 
+- **Authentication**
+  - You can log in to the application using the following credentials:
+    - **Username**: `test`
+    - **Password**: `test_password1234`
+
 ## Installation
 
 1. **Clone the Repository**
