@@ -17,89 +17,91 @@
       </div>
     </div>
   </header>
-  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
-    <h1 class="p-2">
-      Redactor list
-      <a href="{% url 'newspapers:redactor-create' %}" class="btn btn-primary link-to-page">
-        Create
-      </a>
-    </h1>
-    <div class="col-12 col-md-6 col-xl-4 mt-2 mx-2">
-      {% include "includes/search_form.html" %}
-    </div>
-    {% if redactor_list %}
-      <div class="row justify-content-center mb-4">
-        <div class="col-lg-12">
-          <div class="card border-0">
-            <div class="table-responsive">
-              <table class="table align-items-center mb-0">
-                <thead>
-                <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Username</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Full name</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                    Email
-                  </th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                    Years of experience
-                  </th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                    Update
-                  </th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                    Delete
-                  </th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for redactor in redactor_list %}
+  <div class="container">
+    <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
+      <h1 class="p-2">
+        Redactor list
+        <a href="{% url 'newspapers:redactor-create' %}" class="btn btn-primary link-to-page">
+          Create
+        </a>
+      </h1>
+      <div class="col-12 col-md-6 col-xl-4 mt-2 mx-2">
+        {% include "includes/search_form.html" %}
+      </div>
+      {% if redactor_list %}
+        <div class="row justify-content-center mb-4">
+          <div class="col-lg-12">
+            <div class="card border-0">
+              <div class="table-responsive">
+                <table class="table align-items-center mb-0">
+                  <thead>
                   <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-xs">
-                            <a class="text-decoration-underline"
-                               href="{% url 'newspapers:redactor-detail' pk=redactor.id %}">
-                              {{ redactor.username }}
-                            </a>
-                          </h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-xs font-weight-bold mb-0">{{ redactor.first_name }} {{ redactor.last_name }}</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <p class="text-xs font-weight-bold mb-0">{{ redactor.email }}</p>
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">{{ redactor.years_of_experience }}</span>
-                    </td>
-                    <td class="align-middle text-center">
-                      <a href="{% url 'newspapers:redactor-update' pk=redactor.id %}"
-                         class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                         data-original-title="Edit user">
-                        Edit
-                      </a>
-                    </td>
-                    <td class="align-middle text-center">
-                      <a href="{% url 'newspapers:redactor-delete' pk=redactor.id %}"
-                         class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                         data-original-title="Edit user">
-                        Delete
-                      </a>
-                    </td>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Username</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Full name</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      Email
+                    </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      Years of experience
+                    </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      Update
+                    </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      Delete
+                    </th>
                   </tr>
-                {% endfor %}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                  {% for redactor in redactor_list %}
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-xs">
+                              <a class="text-decoration-underline"
+                                 href="{% url 'newspapers:redactor-detail' pk=redactor.id %}">
+                                {{ redactor.username }}
+                              </a>
+                            </h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="text-xs font-weight-bold mb-0">{{ redactor.first_name }} {{ redactor.last_name }}</p>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <p class="text-xs font-weight-bold mb-0">{{ redactor.email }}</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ redactor.years_of_experience }}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <a href="{% url 'newspapers:redactor-update' pk=redactor.id %}"
+                           class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                           data-original-title="Edit user">
+                          Edit
+                        </a>
+                      </td>
+                      <td class="align-middle text-center">
+                        <a href="{% url 'newspapers:redactor-delete' pk=redactor.id %}"
+                           class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                           data-original-title="Edit user">
+                          Delete
+                        </a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    {% else %}
-      <p>There are no redactors in newspaper agency</p>
-    {% endif %}
-    {% include 'includes/pagination.html' %}
+      {% else %}
+        <p>There are no redactors in newspaper agency</p>
+      {% endif %}
+      {% include 'includes/pagination.html' %}
+    </div>
   </div>
 {% endblock %}

@@ -21,43 +21,45 @@
     </div>
   </header>
 
-  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
-    <section class="pt-3 pb-4" id="count-stats">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-9 mx-auto py-3">
-            <div class="row">
-              <div class="col-md-4 position-relative">
-                <div class="p-3 text-center">
-                  <h1 class="text-gradient text-dark"><span id="state1" countTo="{{ num_newspapers }}">0</span>+</h1>
-                  <h5 class="mt-3">Newspapers</h5>
-                  <p class="text-sm font-weight-normal">From articles, to editorials, columns, and reports, you are
-                    covered</p>
+  <div class="container">
+    <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
+      <section class="pt-3 pb-4" id="count-stats">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-9 mx-auto py-3">
+              <div class="row">
+                <div class="col-md-4 position-relative">
+                  <div class="p-3 text-center">
+                    <h1 class="text-gradient text-dark"><span id="state1" countTo="{{ num_newspapers }}">0</span>+</h1>
+                    <h5 class="mt-3">Newspapers</h5>
+                    <p class="text-sm font-weight-normal">From articles, to editorials, columns, and reports, you are
+                      covered</p>
+                  </div>
+                  <hr class="vertical dark">
                 </div>
-                <hr class="vertical dark">
-              </div>
-              <div class="col-md-4 position-relative">
-                <div class="p-3 text-center">
-                  <h1 class="text-gradient text-dark"><span id="state2" countTo="{{ num_redactors }}">0</span>+</h1>
-                  <h5 class="mt-3">Redactors</h5>
-                  <p class="text-sm font-weight-normal">Collaborate on articles, edit content, and bring your unique
-                    voice to the publication.</p>
+                <div class="col-md-4 position-relative">
+                  <div class="p-3 text-center">
+                    <h1 class="text-gradient text-dark"><span id="state2" countTo="{{ num_redactors }}">0</span>+</h1>
+                    <h5 class="mt-3">Redactors</h5>
+                    <p class="text-sm font-weight-normal">Collaborate on articles, edit content, and bring your unique
+                      voice to the publication.</p>
+                  </div>
+                  <hr class="vertical dark">
                 </div>
-                <hr class="vertical dark">
-              </div>
-              <div class="col-md-4">
-                <div class="p-3 text-center">
-                  <h1 class="text-gradient text-dark" id="state3" countTo="{{ num_topics }}">0</h1>
-                  <h5 class="mt-3">Topics</h5>
-                  <p class="text-sm font-weight-normal">Explore a wide range of topics covered in our newspaper, from
-                    current events to in-depth analyses.</p>
+                <div class="col-md-4">
+                  <div class="p-3 text-center">
+                    <h1 class="text-gradient text-dark" id="state3" countTo="{{ num_topics }}">0</h1>
+                    <h5 class="mt-3">Topics</h5>
+                    <p class="text-sm font-weight-normal">Explore a wide range of topics covered in our newspaper, from
+                      current events to in-depth analyses.</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
 {% endblock %}
 

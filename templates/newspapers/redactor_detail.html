@@ -17,28 +17,30 @@
       </div>
     </div>
   </header>
-  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
-    <h1 class="p-2">
-      {{ redactor.username }}
-      <a href="{% url 'newspapers:redactor-update' pk=redactor.id %}" class="btn btn-primary link-to-page">
-        Update
-      </a>
-      <a href="{% url 'newspapers:redactor-delete' pk=redactor.id %}" class="btn btn-danger link-to-page">
-        Delete
-      </a>
-    </h1>
-    <p>Full name: <span class="text-dark">{{ redactor.first_name }} {{ redactor.last_name }}</span></p>
-    <p>Email: <span class="text-dark">{{ redactor.email }}</span></p>
-    <p>Years of experience: <span class="text-dark">{{ redactor.years_of_experience }}</span></p>
-    <p>
-      {% if redactor.newspapers.all %}
-        Newspapers:
-        {% for newspaper in redactor.newspapers.all %}
-          <a href="{% url 'newspapers:newspaper-detail' pk=newspaper.id %}">{{ newspaper.title }}</a>,
-        {% endfor %}
-      {% else %}
-        This author has not written any newspapers
-      {% endif %}
-    </p>
+  <div class="container">
+    <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
+      <h1 class="p-2">
+        {{ redactor.username }}
+        <a href="{% url 'newspapers:redactor-update' pk=redactor.id %}" class="btn btn-primary link-to-page">
+          Update
+        </a>
+        <a href="{% url 'newspapers:redactor-delete' pk=redactor.id %}" class="btn btn-danger link-to-page">
+          Delete
+        </a>
+      </h1>
+      <p>Full name: <span class="text-dark">{{ redactor.first_name }} {{ redactor.last_name }}</span></p>
+      <p>Email: <span class="text-dark">{{ redactor.email }}</span></p>
+      <p>Years of experience: <span class="text-dark">{{ redactor.years_of_experience }}</span></p>
+      <p>
+        {% if redactor.newspapers.all %}
+          Newspapers:
+          {% for newspaper in redactor.newspapers.all %}
+            <a href="{% url 'newspapers:newspaper-detail' pk=newspaper.id %}">{{ newspaper.title }}</a>,
+          {% endfor %}
+        {% else %}
+          This author has not written any newspapers
+        {% endif %}
+      </p>
+    </div>
   </div>
 {% endblock %}

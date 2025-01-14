@@ -28,12 +28,14 @@
       </div>
     </div>
   </header>
-  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
-    <h1 class="p-2">{{ object|yesno:"Update,Create" }} newspaper</h1>
-    <form action="" method="post" novalidate>
-      {% csrf_token %}
-      {{ form|crispy }}
-      <input type="submit" value="Submit" class="btn btn-primary">
-    </form>
+  <div class="container">
+    <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
+      <h1 class="p-2">{{ object|yesno:"Update,Create" }} newspaper</h1>
+      <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" value="Submit" class="btn btn-primary">
+      </form>
+    </div>
   </div>
 {% endblock %}

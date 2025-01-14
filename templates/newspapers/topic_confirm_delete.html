@@ -17,15 +17,17 @@
       </div>
     </div>
   </header>
-  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
-    <h1 class="p-2">
-      Delete topic with name <span class="text-info">{{ topic.name }}</span>?
-    </h1>
-    <form action="" method="post">
-      {% csrf_token %}
-      <input type="submit" value="Yes" class="btn btn-danger link-to-page">
-      <button type="reset" onclick="goBack()" class="btn btn-secondary">Back</button>
-    </form>
+  <div class="container">
+    <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
+      <h1 class="p-2">
+        Delete topic with name <span class="text-info">{{ topic.name }}</span>?
+      </h1>
+      <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Yes" class="btn btn-danger link-to-page">
+        <button type="reset" onclick="goBack()" class="btn btn-secondary">Back</button>
+      </form>
+    </div>
   </div>
 {% endblock %}
 
