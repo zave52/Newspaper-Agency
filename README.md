@@ -50,11 +50,16 @@
   - [Bootstrap 5](https://getbootstrap.com/) - Utilized for styling and responsive design components.
 
 - **Database**
-  - SQLite - Default database for Django projects, suitable for development and testing purposes.
+  - **SQLite** - Used as the default database for development and testing purposes.
+  - **PostgreSQL** - Utilized for production environments, providing a robust and scalable database solution.
 
 - **Additional Libraries**
   - **Crispy Forms** - For enhanced form rendering and styling.
   - **Debug Toolbar** - Assists in debugging and optimizing the application during development.
+
+## Deployment
+
+The Newspaper Agency application is now live and can be accessed at the following link: [Newspaper Agency](https://newspaper-agency-y8oq.onrender.com/).
 
 ## Installation
 
@@ -80,26 +85,65 @@
 
 4. **Configure Environment Variables**
 
-   - Create a `.env` file in the root directory.
-   - Add the following variables:
+   - Copy the sample environment variables file:
 
-     ```env
-     SECRET_KEY=your_secret_key_here
+     ```bash
+     cp .env.sample .env
      ```
 
-5. **Apply Migrations**
+   - Open the `.env` file in your preferred text editor and configure the following variables:
+
+     ```env
+     # Django
+     SECRET_KEY=your_secret_key_here
+     DJANGO_SETTINGS_MODULE=your_project.settings
+     RENDER_EXTERNAL_HOSTNAME=your_domain
+
+     # DB
+     POSTGRES_DB=newspaper_agency
+     POSTGRES_DB_PORT=5432
+     POSTGRES_USER=your_db_user
+     POSTGRES_PASSWORD=your_db_password
+     POSTGRES_HOST=localhost
+     ```
+
+     - **SECRET_KEY**: Replace `your_secret_key_here` with a strong secret key.
+     - **DJANGO_SETTINGS_MODULE**: Typically set to `newspaper_agency.settings`.
+     - **RENDER_EXTERNAL_HOSTNAME**: Your deployment domain if applicable.
+     - **POSTGRES_DB**: Name of your PostgreSQL database, e.g., `newspaper_agency`.
+     - **POSTGRES_DB_PORT**: Port for PostgreSQL, usually `5432`.
+     - **POSTGRES_USER**: Your PostgreSQL username.
+     - **POSTGRES_PASSWORD**: Your PostgreSQL password.
+     - **POSTGRES_HOST**: Host address for PostgreSQL, e.g., `localhost` or your database server address.
+
+5. **Set Up the Database**
+
+   - **For SQLite (Development):** No additional steps required.
+   - **For PostgreSQL (Production):**
+     - Ensure PostgreSQL is installed and running.
+     - Create a new PostgreSQL database and user:
+
+       ```bash
+       psql
+       CREATE DATABASE newspaper_agency;
+       CREATE USER your_db_user WITH PASSWORD 'your_db_password';
+       GRANT ALL PRIVILEGES ON DATABASE newspaper_agency TO your_db_user;
+       \q
+       ```
+
+6. **Apply Migrations**
 
    ```bash
    python manage.py migrate
    ```
 
-6. **Create a Superuser**
+7. **Create a Superuser**
 
    ```bash
    python manage.py createsuperuser
    ```
 
-7. **Run the Development Server**
+8. **Run the Development Server**
 
    ```bash
    python manage.py runserver
