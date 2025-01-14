@@ -21,3 +21,19 @@ DATABASES = {
         'PORT': int(os.environ["POSTGRES_DB_PORT"]),
     }
 }
+
+# Redirect all HTTP requests to HTTPS
+SECURE_SSL_REDIRECT = True
+
+# Use secure cookies for sessions
+SESSION_COOKIE_SECURE = True
+
+# Use secure cookies for CSRF
+CSRF_COOKIE_SECURE = True
+
+# Enable HTTP Strict Transport Security (HSTS)
+SECURE_HSTS_SECONDS = 31536000
+
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+SECURE_HSTS_PRELOAD = True
